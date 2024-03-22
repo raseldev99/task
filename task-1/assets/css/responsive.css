@@ -1,0 +1,289 @@
+
+/* X-Large devices (large desktops, less than 1400px) */
+@media (max-width: 1399.98px) { 
+
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) { 
+    /*Header CSS*/
+    .header{
+        padding: 20px 0;
+    }
+    .logo{
+        font-size: 40px;
+    }
+    .navbar a{
+        padding: 0 27px;
+    }
+
+    /*Hero Section Css*/
+    .hero-section{
+        padding: 220px 0 150px 0;
+    }
+
+    .hero-section h2{
+        font-size: 50px;
+    }
+
+    .hero-section p{
+        font-size: 18px;
+    }
+    
+    /*Gallery Section Img*/
+    .gallery{
+        grid-template-columns: repeat(3,minmax(0,1fr));
+    }
+
+    /*Testimonial Section CSS */
+    .testimonial .testimonial-item.img{
+        background-position: bottom right;
+    }
+    .testimonial .testimonial-item.info{
+        padding: 60px 80px 100px 80px;
+    }
+    .testimonial .testimonial-item.info h5{
+        width: auto;
+        font-size: 28px;
+    }
+    .testimonial .testimonial-item.info p{
+        margin-top: 20px;
+    }
+    #testimonial-carousel .carousel-indicators {
+        left: 60%;
+        bottom: 30px;
+    }
+
+    /*Footer Section CSS*/
+    .footer .footer-wrapper .single-item{
+        padding: 0 50px;
+    }
+    .copyright{
+        padding: 18px 0;
+    }
+}
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) { 
+    /*Common CSS*/
+    .section-padding{
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+    /*Header CSS*/
+    .navbar a{
+        padding: 0 12px;
+    }
+    .logo{
+        font-size: 30px;
+    }
+
+    /*Hero Section Css*/
+    .hero-section{
+        padding: 200px 0 130px 0;
+    }
+
+    .hero-section h2{
+        font-size: 30px;
+    }
+
+    .hero-section p{
+        font-size: 16px;
+    }
+    .hero-wrapper{
+        padding: 0 120px;
+    }
+
+    /*Gallery Section Img*/
+    .gallery{
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    /*Testimonial Section CSS */
+    .testimonial .testimonial-item.info{
+        padding: 60px 50px 80px 50px;
+    }
+    .testimonial .testimonial-item.info h5{
+        font-size: 20px;
+    }
+    .testimonial .testimonial-item.info p{
+        margin-top: 15px;
+        font-size: 10px;
+    }
+    #testimonial-carousel .carousel-indicators {
+        bottom: 20px;
+    }
+    #testimonial-carousel .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+    }
+
+    /*Footer Section*/
+    .footer .footer-wrapper .single-item{
+        padding: 0 20px;
+    }
+
+    .copyright{
+        padding: 15px 0;
+    }
+    
+    .copyright p{
+        font-size: 14px;
+    }
+}
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) { 
+    /*Common CSS*/
+    .primary-btn{
+        padding: 15px 40px;
+        font-size: 12px;
+    }
+    .section-padding{
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    /*Header CSS*/
+    .navbar{
+        display: none !important;
+    }
+    .mobile-bar{
+        display: block;
+    }
+
+    /*Hero Section Css*/
+    .hero-section{
+        padding: 150px 0 80px 0;
+    }
+    .hero-wrapper{
+        padding: 0 80px;
+    }
+
+    /*Features Section CSS*/
+    .feature .single-feature{
+        padding: 15px 30px;
+    }
+
+    .feature .single-feature .icon img{
+        max-height: 30px;
+    }
+    /*Gallery Section Img*/
+    .gallery .single-gallery-item{
+        height: 250px;
+    }
+
+    /*Testimonial Section CSS */
+    .testimonial .testimonial-item.info{
+        padding: 40px 20px 60px 40px;
+    }
+    #testimonial-carousel .carousel-indicators {
+        bottom: 10px;
+    }
+    #testimonial-carousel .carousel-indicators button {
+        width: 8px;
+        height: 8px;
+    }
+    /*Download Section*/
+    .download .download-wrapper h4{
+        font-size: 24px;
+    }
+    .download .download-wrapper button{
+        padding: 12px 50px;
+        margin-top: 30px;
+
+    }
+    /*Footer CSS*/
+    .footer .footer-wrapper .single-item{
+        padding: 0 50px;
+    }
+    .footer .footer-wrapper .single-item p{
+        margin-bottom: 0;
+    }
+}
+/*X-Small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    /*Common CSS*/
+    html,body{
+        overflow-x: hidden;
+    }
+    .primary-btn{
+        padding: 12px 30px;
+        font-size: 10px;
+    }
+    /*Header CSS*/
+    .header{
+        padding: 12px 0;
+    }
+    .mobile-menu .logo{
+        font-size: 28px;
+    }
+    .mobile-menu .navbar a{
+        padding: 6px 0;
+        font-size: 12px;
+    }
+    .mobile-menu{
+        width: 250px;
+    }
+    .mobile-menu .close svg{
+        width: 26px;
+        height: 26px;
+    }
+    /*Hero Section Css*/
+    .hero-section h2{
+        font-size: 24px;
+    }
+    .hero-section p{
+        font-size: 12px;
+    }
+    .hero-section{
+        padding: 130px 0 60px 0;
+    }
+    .hero-wrapper{
+        padding: 0 40px;
+    }
+
+    /*Features Section CSS*/
+    .feature .single-feature{
+        padding: 15px 45px;
+    }
+
+    .feature .single-feature .icon img{
+        max-height: 35px;
+    }
+    /*Gallery Section Img*/
+    .gallery .single-gallery-item{
+        height: 220px;
+    }
+    .gallery{
+        grid-template-columns: repeat(1,minmax(0,1fr));
+    }
+    /*Testimonial Section CSS */
+    .testimonial .testimonial-wrapper{
+        display: block !important;
+    }
+    .testimonial .testimonial-item.info{
+        width: 100%;
+    }
+    #testimonial-carousel .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+    }
+    #testimonial-carousel .carousel-indicators {
+        left: 30%;
+        bottom: 0;
+    }
+    /*Download Section*/
+    .download{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .download .download-wrapper h4{
+        font-size: 18px;
+    }
+    .download .download-wrapper button{
+        padding: 10px 30px;
+        margin-top: 20px;
+
+    }
+}
+
+
+
