@@ -2,11 +2,12 @@
 
 namespace App\Services\Auth;
 
-use App\Http\Requests\API\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Traits\ApiResponse;
 use Auth;
+use Illuminate\Auth\AuthenticationException;
 
 class AuthenticationService
 {
@@ -21,6 +22,7 @@ class AuthenticationService
 
     /**
      * Handle user login
+     * @throws AuthenticationException
      */
     public function login(LoginRequest $request): User
     {

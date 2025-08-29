@@ -14,11 +14,11 @@ use BenSampo\Enum\Enum;
  */
 final class BookingStatus extends Enum
 {
-    const  Pending = 'pending';
+    const Pending = 'pending';
 
-    const  Confirm = 'confirm';
+    const Confirm = 'confirm';
 
-    const  cancelled = 'cancelled';
+    const cancelled = 'cancelled';
 
-    const  completed = 'completed';
+    const completed = 'completed';
 }

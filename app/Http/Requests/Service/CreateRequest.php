@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Service;
 
 use App\Enums\ServiceStatus;
-use App\Models\Service;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,7 +27,7 @@ class CreateRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:10000'],
             'price' => ['required', 'numeric', 'min:0'],
-            'status' => ['sometimes', 'in:' . implode(',', ServiceStatus::getValues())],
+            'status' => ['sometimes', 'in:'.implode(',', ServiceStatus::getValues())],
         ];
     }
 }

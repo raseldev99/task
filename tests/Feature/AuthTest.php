@@ -14,12 +14,12 @@ it('allows a user to register', function () {
     ]);
 
     $response->assertStatus(201)
-    ->assertJsonStructure([
-        'success',
-        'message',
-        'status_code',
-        'timestamp'
-    ]);
+        ->assertJsonStructure([
+            'success',
+            'message',
+            'status_code',
+            'timestamp',
+        ]);
 
     $this->assertDatabaseHas('users', [
         'email' => 'test@example.com',
@@ -61,9 +61,9 @@ it('allows a user to login with correct credentials', function () {
                 ],
                 'token' => [
                     'token_type',
-                    'access_token'
+                    'access_token',
                 ],
-            ]
+            ],
         ]);
 });
 
@@ -79,9 +79,9 @@ it('rejects login with wrong password', function () {
 
     $response->assertStatus(401)
         ->assertJson([
-            "success" => false,
-            "message" => "These credentials do not match our records.",
-            "status_code" => 401,
-            "error_code" => "UNAUTHORIZED",
+            'success' => false,
+            'message' => 'These credentials do not match our records.',
+            'status_code' => 401,
+            'error_code' => 'UNAUTHORIZED',
         ]);
 });

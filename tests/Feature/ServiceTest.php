@@ -23,7 +23,7 @@ it('allows a user to fetch only published services', function () {
     $response = $this->getJson('/api/services');
 
     $response->assertStatus(200)
-        ->assertJsonFragment(['status' =>  ServiceStatus::Published()->value])
+        ->assertJsonFragment(['status' => ServiceStatus::Published()->value])
         ->assertJsonMissing(['status' => ServiceStatus::Draft()->value])
         ->assertJsonMissing(['status' => ServiceStatus::Archived()->value]);
 });

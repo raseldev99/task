@@ -36,7 +36,7 @@ it('allows user to create a new booking', function () {
     $service = Service::factory()->create(['status' => \App\Enums\ServiceStatus::Published()->value]);
 
     Sanctum::actingAs($user, ['*']);
-    $booking_date = Carbon::now()->addDay()->format("Y-m-d");
+    $booking_date = Carbon::now()->addDay()->format('Y-m-d');
     $payload = [
         'user_id' => $user->id,
         'service_id' => $service->id,
@@ -48,7 +48,7 @@ it('allows user to create a new booking', function () {
     $response->assertStatus(201)
         ->assertJsonFragment(['booking_date' => $booking_date]);
 
-    $this->assertDatabaseHas('bookings', ['user_id' => $user->id, 'service_id' => $service->id,'booking_date' => $booking_date]);
+    $this->assertDatabaseHas('bookings', ['user_id' => $user->id, 'service_id' => $service->id, 'booking_date' => $booking_date]);
 });
 
 it('rejects unauthenticated users for user bookings route', function () {
@@ -63,7 +63,6 @@ it('rejects non-user roles for user bookings route', function () {
     $response = $this->getJson('/api/bookings');
     $response->assertStatus(403);
 });
-
 
 // ---------------------
 // Admin Routes
@@ -85,5 +84,3 @@ it('allows admin to list all bookings', function () {
     $response->assertStatus(200)
         ->assertJsonCount(200, 'data');
 });
-
-
