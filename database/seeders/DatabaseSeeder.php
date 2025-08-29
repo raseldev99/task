@@ -29,8 +29,16 @@ class DatabaseSeeder extends Seeder
             'password' => '12345678'
         ]);
 
+        //create 10 example customers
+        User::factory()
+            ->count(10)
+            ->create();
+
+
+        //call all the seeder
         $this->call([
             ServiceSeeder::class,
+            BookingSeeder::class,
         ]);
     }
 }

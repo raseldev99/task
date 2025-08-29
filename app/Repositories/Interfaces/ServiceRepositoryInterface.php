@@ -25,7 +25,7 @@ interface ServiceRepositoryInterface
      * Get filter services
      * @param int $perPage
      * @param array $filters
-     * @return Collection
+     * @return LengthAwarePaginator
      */
     public function pagination(int $perPage = 10, array $filters = []): LengthAwarePaginator;
 
