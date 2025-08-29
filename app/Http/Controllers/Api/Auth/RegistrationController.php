@@ -28,6 +28,6 @@ class RegistrationController extends Controller
         // create user using validated data
         $user = $this->authenticationService->register($request->validated());
 
-        return $this->ok('Register Successful');
+        return $this->created('Register Successful');
     }
 }

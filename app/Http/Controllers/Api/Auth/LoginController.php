@@ -32,7 +32,7 @@ class LoginController extends Controller
             'user' => new UserResource($user),
             'token' => [
                 'token_type' => 'Bearer',
-                'token' => $user->createToken('AuthToken')->plainTextToken,
+                'access_token' => $user->createToken('AuthToken')->plainTextToken,
             ],
         ]);
     }
