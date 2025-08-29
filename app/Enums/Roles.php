@@ -12,7 +12,7 @@ use BenSampo\Enum\Enum;
  */
 final class Roles extends Enum
 {
-    const string Admin = 'admin';
+    const  Admin = 'admin';
 
-    const string User = 'user';
+    const  User = 'user';
 }

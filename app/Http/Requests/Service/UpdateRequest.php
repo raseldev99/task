@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Service;
 
+use App\Enums\ServiceStatus;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,6 +27,7 @@ class UpdateRequest extends FormRequest
             'name' => ['sometimes', 'string', 'max:255'],
             'description' => ['sometimes', 'string', 'max:10000'],
             'price' => ['sometimes', 'numeric', 'min:0'],
+            'status' => ['sometimes', 'in:' . implode(',', ServiceStatus::getValues())],
         ];
     }
 }
