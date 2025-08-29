@@ -1,61 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Simple Service Booking System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a **Simple Service Booking System** built with Laravel.  
+It provides functionality for two types of users: **Customers** and **Admins**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Customer
+- View available services
+- Create new bookings
+- View their own bookings
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Admin
+- Manage services (create, update, delete)
+- View all bookings
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tech Stack
+- **Backend:** Laravel (PHP)
+- **Database:** MySQL
+- **Authentication:** Laravel Sanctum
+- **API Format:** RESTful JSON responses
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/raseldev99/task.git
+   cd task
+2. Install dependencies:
+   ```bash
+   composer install
+3. Copy .env file and configure your database:
+   ```bash
+   cp .env.example .env
+4. Generate the application key:
+   ```bash
+   php artisan key:generate
+5. Run migrations and seed the database:
+   ```bash
+   php artisan migrate:fresh --seed
+   
+6. Start the server:
+   ```bash
+   php artisan serve
 
-## Laravel Sponsors
+## Login Credentials
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### Admin Account
+```
+Username: admin@example.com
+Password: 12345678
+```
 
-### Premium Partners
+#### Customer Account
+```
+email: customer@example.com
+password: 12345678
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Example of API Response Output
 
-## Contributing
+### Successful Login Response
+```json
+{
+    "success": true,
+    "message": "Login Successful",
+    "status_code": 200,
+    "data": {
+        "user": {
+            "id": 2,
+            "email": "admin@example.com",
+            "name": "Admin",
+            "role": "admin"
+        },
+        "token": {
+            "token_type": "Bearer",
+            "access_token": "8|07t4rh050dWa96b1cVAVKlkmu4U1MMTzjvA0fV7i34788f7a"
+        }
+    },
+    "timestamp": "2025-08-29T17:15:28.753808Z"
+}
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Validation Error Response
+```json
+{
+    "success": false,
+    "message": "The email field is required. (and 1 more error)",
+    "status_code": 422,
+    "error_code": "VALIDATION_ERROR",
+    "errors": {
+        "email": [
+            "The email field is required."
+        ],
+        "password": [
+            "The password field is required."
+        ]
+    },
+    "timestamp": "2025-08-29T17:18:44.017877Z"
+}
+```
 
-## Code of Conduct
+### Wrong Credentials
+```json
+{
+    "success": false,
+    "message": "These credentials do not match our records.",
+    "status_code": 401,
+    "error_code": "UNAUTHORIZED",
+    "timestamp": "2025-08-29T17:19:52.222472Z"
+}
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
+### List Response With Pagination
+```json
+{
+    "success": true,
+    "message": "Data retrieved successfully",
+    "status_code": 200,
+    "data": [
+        {
+            "id": 1,
+            "name": "Clovis Hill",
+            "price": "1000.00",
+            "description": "Saepe nobis accusamus",
+            "status": "archived"
+        },
+        {
+            "id": 2,
+            "name": "Catherine Nikolaus V",
+            "price": "1000.00",
+            "description": "Voluptas possimus magni in ea.",
+            "status": "draft"
+        }
+    ],
+    "pagination": {
+        "current_page": 1,
+        "last_page": 34,
+        "per_page": 3,
+        "total": 100,
+        "from": 1,
+        "to": 3,
+        "has_more_pages": true
+    },
+    "links": {
+        "first": "http://task.test/api/admin/services?page=1",
+        "last": "http://task.test/api/admin/services?page=34",
+        "prev": null,
+        "next": "http://task.test/api/admin/services?page=2"
+    },
+    "timestamp": "2025-08-29T17:20:35.823430Z"
+}
+```
+   
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+

@@ -20,10 +20,10 @@ uses(RefreshDatabase::class);
 
 it('allows a user to fetch only own bookings', function () {
     $user = User::factory()->create(['role' => Roles::User()->value]);
-    $user2 = User::factory()->create(['role' => Roles::User()->value]);
+    $users = User::factory()->count(10)->create(['role' => Roles::User()->value]);
     Service::factory()->count(20)->create();
     Booking::factory()->count(100)->create(['user_id' => $user->id]);
-    Booking::factory()->count(100)->create(['user_id' => $user2->id]);
+    Booking::factory()->count(100)->create(['user_id' => $user->random()->id]);
     Sanctum::actingAs($user, ['*']);
     $response = $this->getJson('/api/bookings?per_page=1000');
 
