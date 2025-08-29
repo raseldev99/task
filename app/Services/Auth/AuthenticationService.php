@@ -4,8 +4,8 @@ namespace App\Services\Auth;
 
 use App\Http\Requests\API\Auth\LoginRequest;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\Repositories\UserRepository;
 use App\Traits\ApiResponse;
 use Auth;
 use Illuminate\Http\JsonResponse;
@@ -24,32 +24,22 @@ class AuthenticationService
     /**
      * Handle user login
      * @param LoginRequest $request
-     * @return JsonResponse
+     * @return User
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request): User
     {
         //Authenticate the request
         $request->authenticate();
-        $user = Auth::user();
-        return $this->success('Login Successful',[
-            'user' => new UserResource($user),
-            'token' => [
-                'token_type' => 'Bearer',
-                'token' => $user->createToken('AuthToken')->plainTextToken,
-            ]
-        ]);
+        return Auth::user();
     }
 
     /**
      * create a new user
      * @param array $userData
-     * @return JsonResponse
+     * @return User
      */
-    public function register(array $userData): JsonResponse
+    public function register(array $userData): User
     {
-        // Create user
-        $user = $this->userRepository->create($userData);
-
-        return $this->ok('Register Successful');
+        return $this->userRepository->create($userData);
     }
 }

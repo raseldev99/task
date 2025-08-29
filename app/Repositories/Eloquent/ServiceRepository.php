@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Repositories\Eloquent;
+
+use App\Models\Service;
+use App\Repositories\Interfaces\ServiceRepositoryInterface;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+
+class ServiceRepository implements ServiceRepositoryInterface
+{
+    public Service $model;
+
+    public function __construct(Service $service)
+    {
+        $this->model = $service;
+    }
+
+    /**
+     * Get all the services
+     * @return Collection
+     */
+    public function all(): Collection
+    {
+        return $this->model->all();
+    }
+
+    /**
+     * Find service by id
+     * @param string $id
+     * @return Service|null
+     */
+    public function findById(string $id): ?Service
+    {
+        return $this->model->find($id);
+    }
+
+    /**
+     * Get pagination with filter data
+     * @param int $perPage
+     * @param array $filters
+     * @return LengthAwarePaginator
+     */
+    public function pagination(int $perPage = 10, array $filters = []): LengthAwarePaginator
+    {
+        return $this->filter($this->model->query(),$filters)->paginate($perPage);
+    }
+
+    /**
+     * Find a service by id or fail
+     * @param string $id
+     * @return Service
+     */
+    public function findOrFailById(string $id): Service
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * Create a service
+     * @param array $data
+     * @return Service
+     */
+    public function create(array $data): Service
+    {
+        return $this->model->create($data);
+    }
+
+    /**
+     * Update a service
+     * @param Service $service
+     * @param array $data
+     * @return Service
+     */
+    public function update(Service $service, array $data): Service
+    {
+        $service->update($data);
+        return $service->fresh();
+    }
+
+    /**
+     * Delete a service
+     * @param Service $service
+     * @return void
+     */
+    public function delete(Service $service): void
+    {
+        $service->delete();
+    }
+
+    /**
+     * Build a filter query
+     * @param Builder $query
+     * @param array $filters
+     * @return Builder
+     */
+    public function filter(Builder $query, array $filters): Builder
+    {
+        return $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%');
+        })->when($filters['status'] ?? null, function ($query, $status) {
+            $query->where('status', $status);
+        })->when($filters['min_price'] ?? null, function ($query, $price) {
+            $query->where('price', '>=', $price);
+        })->when($filters['max_price'] ?? null, function ($query, $price) {
+            $query->where('price', '<=', $price);
+        })->when(isset($filters['order_by']) || isset($filters['order']), function ($query) use ($filters) {
+            $orderBy = $filters['order_by'] ?? 'id';
+            $order = $filters['order'] ?? 'desc';
+            $query->orderBy($orderBy, $order);
+        });
+    }
+}

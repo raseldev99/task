@@ -31,7 +31,7 @@ class ApiExceptionHandler extends Exception
 
         // Model Not Found Exception
         if ($e instanceof ModelNotFoundException) {
-            return $this->notFound('Record not found');
+            return $this->notFound($e->getMessage());
         }
 
         // Authentication Exception
@@ -46,7 +46,7 @@ class ApiExceptionHandler extends Exception
 
         // Page Not Found Exception
         if ($e instanceof NotFoundHttpException) {
-            return $this->notFound('Page not found');
+            return $this->notFound('Record not found');
         }
 
         // Bad Request Exception

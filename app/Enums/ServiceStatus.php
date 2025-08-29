@@ -5,11 +5,14 @@ namespace App\Enums;
 use BenSampo\Enum\Enum;
 
 /**
- * @method static static Active()
- * @method static static InActive()
+ * @method static static Published()
+ * @method static static Draft()
+ * @method static static Archived()
  */
 final class ServiceStatus extends Enum
 {
-    const string Active = 'active';
-    const string InActive = 'inactive';
+    const  Published = 'published';
+    const  Draft = 'draft';
+
+    const  Archived = 'archived';
 }

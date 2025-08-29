@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->decimal('price',8,2);
-            $table->enum('status',ServiceStatus::getValues())->default(ServiceStatus::Active());
+            $table->enum('status',ServiceStatus::getValues())->default(ServiceStatus::Published());
             $table->timestamps();
         });
     }

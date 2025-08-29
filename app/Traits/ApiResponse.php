@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -162,10 +163,24 @@ trait ApiResponse
      * Return paginated response
      */
     public function paginated(
+        Paginator | LengthAwarePaginator | ResourceCollection $paginator,
         string $message = 'Data retrieved successfully',
-        Paginator|LengthAwarePaginator $paginator,
         array $meta = []
-    ): JsonResponse {
+    ): JsonResponse
+    {
+        $isResourceCollection = $paginator instanceof ResourceCollection;
+        $underlyingPaginator = $isResourceCollection ? $paginator->resource : $paginator;
+
+        // Validate that we have paginated data
+        if (!($underlyingPaginator instanceof Paginator)) {
+            if ($isResourceCollection) {
+                throw new \InvalidArgumentException(
+                    'ResourceCollection does not contain paginated data. Resource type: ' . get_class($paginator->resource)
+                );
+            }
+            throw new \InvalidArgumentException('Invalid paginator type provided.');
+        }
+
         $response = [
             'success' => true,
             'message' => $message,
@@ -173,32 +188,20 @@ trait ApiResponse
             'data' => $paginator->items(),
             'pagination' => [
                 'current_page' => $paginator->currentPage(),
+                'last_page' => $paginator->lastPage(),
                 'per_page' => $paginator->perPage(),
+                'total' => $paginator->total(),
                 'from' => $paginator->firstItem(),
                 'to' => $paginator->lastItem(),
-                'path' => $paginator->path(),
+                'has_more_pages' => $paginator->hasMorePages(),
             ],
+            'links' => [
+                'first' => $paginator->url(1),
+                'last' => $paginator->url($paginator->lastPage()),
+                'prev' => $paginator->previousPageUrl(),
+                'next' => $paginator->nextPageUrl(),
+            ]
         ];
-
-        // Add pagination info specific to LengthAwarePaginator
-        if ($paginator instanceof LengthAwarePaginator) {
-            $response['pagination'] = array_merge($response['pagination'], [
-                'last_page' => $paginator->lastPage(),
-                'total' => $paginator->total(),
-                'first_page_url' => $paginator->url(1),
-                'last_page_url' => $paginator->url($paginator->lastPage()),
-                'next_page_url' => $paginator->nextPageUrl(),
-                'prev_page_url' => $paginator->previousPageUrl(),
-                'has_more_pages' => $paginator->hasMorePages(),
-            ]);
-        } else {
-            // For simple paginator
-            $response['pagination'] = array_merge($response['pagination'], [
-                'next_page_url' => $paginator->nextPageUrl(),
-                'prev_page_url' => $paginator->previousPageUrl(),
-                'has_more_pages' => $paginator->hasMorePages(),
-            ]);
-        }
 
         if (!empty($meta)) {
             $response['meta'] = $meta;
