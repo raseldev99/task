@@ -10,7 +10,9 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'service_id', 'booking_date', 'status'];
+
     protected array $dates = ['booking_date'];
+
     protected $casts = [
         'date' => 'date',
     ];

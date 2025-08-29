@@ -13,29 +13,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //create a customer
+        // create a customer
         User::factory()->create([
             'name' => 'Customer',
             'email' => 'customer@example.com',
             'role' => Roles::User(),
-            'password' => '12345678'
+            'password' => '12345678',
         ]);
 
-        //create an admin
+        // create an admin
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'role' => Roles::Admin(),
-            'password' => '12345678'
+            'password' => '12345678',
         ]);
 
-        //create 10 example customers
+        // create 10 example customers
         User::factory()
             ->count(10)
             ->create();
 
-
-        //call all the seeder
+        // call all the seeder
         $this->call([
             ServiceSeeder::class,
             BookingSeeder::class,

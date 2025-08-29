@@ -19,7 +19,6 @@ class ServiceRepository implements ServiceRepositoryInterface
 
     /**
      * Get all the services
-     * @return Collection
      */
     public function all(): Collection
     {
@@ -28,8 +27,6 @@ class ServiceRepository implements ServiceRepositoryInterface
 
     /**
      * Find service by id
-     * @param string $id
-     * @return Service|null
      */
     public function findById(string $id): ?Service
     {
@@ -38,19 +35,14 @@ class ServiceRepository implements ServiceRepositoryInterface
 
     /**
      * Get pagination with filter data
-     * @param int $perPage
-     * @param array $filters
-     * @return LengthAwarePaginator
      */
     public function pagination(int $perPage = 10, array $filters = []): LengthAwarePaginator
     {
-        return $this->filter($this->model->query(),$filters)->paginate($perPage);
+        return $this->filter($this->model->query(), $filters)->paginate($perPage);
     }
 
     /**
      * Find a service by id or fail
-     * @param string $id
-     * @return Service
      */
     public function findOrFailById(string $id): Service
     {
@@ -59,8 +51,6 @@ class ServiceRepository implements ServiceRepositoryInterface
 
     /**
      * Create a service
-     * @param array $data
-     * @return Service
      */
     public function create(array $data): Service
     {
@@ -69,20 +59,16 @@ class ServiceRepository implements ServiceRepositoryInterface
 
     /**
      * Update a service
-     * @param Service $service
-     * @param array $data
-     * @return Service
      */
     public function update(Service $service, array $data): Service
     {
         $service->update($data);
+
         return $service->fresh();
     }
 
     /**
      * Delete a service
-     * @param Service $service
-     * @return void
      */
     public function delete(Service $service): void
     {
@@ -91,14 +77,11 @@ class ServiceRepository implements ServiceRepositoryInterface
 
     /**
      * Build a filter query
-     * @param Builder $query
-     * @param array $filters
-     * @return Builder
      */
     public function filter(Builder $query, array $filters): Builder
     {
         return $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'like', '%' . $search . '%')->orWhere('description', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%');
         })->when($filters['status'] ?? null, function ($query, $status) {
             $query->where('status', $status);
         })->when($filters['min_price'] ?? null, function ($query, $price) {

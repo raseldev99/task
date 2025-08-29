@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Enums;
 
@@ -13,7 +15,10 @@ use BenSampo\Enum\Enum;
 final class BookingStatus extends Enum
 {
     const string Pending = 'pending';
+
     const string Confirm = 'confirm';
+
     const string cancelled = 'cancelled';
+
     const string completed = 'completed';
 }

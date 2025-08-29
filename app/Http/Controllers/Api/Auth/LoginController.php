@@ -13,7 +13,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class LoginController extends Controller
 {
     use ApiResponse;
+
     public AuthenticationService $authenticationService;
+
     public function __construct(AuthenticationService $authenticationService)
     {
         $this->authenticationService = $authenticationService;
@@ -21,19 +23,17 @@ class LoginController extends Controller
 
     /**
      * handle login request
-     * @param LoginRequest $request
-     * @return JsonResponse
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        $user =  $this->authenticationService->login($request);
+        $user = $this->authenticationService->login($request);
 
-       return $this->success('Login Successful',[
+        return $this->success('Login Successful', [
             'user' => new UserResource($user),
             'token' => [
                 'token_type' => 'Bearer',
                 'token' => $user->createToken('AuthToken')->plainTextToken,
-            ]
+            ],
         ]);
     }
 }

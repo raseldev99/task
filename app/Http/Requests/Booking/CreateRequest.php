@@ -25,8 +25,8 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'service_id' => ['required',Rule::exists('services','id')->where(function ($query) {
-                return $query->where('status',ServiceStatus::Published());
+            'service_id' => ['required', Rule::exists('services', 'id')->where(function ($query) {
+                return $query->where('status', ServiceStatus::Published());
             })],
             'booking_date' => 'required|date:Y-m-d|after_or_equal:today',
         ];

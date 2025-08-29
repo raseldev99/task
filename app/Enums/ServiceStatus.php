@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Enums;
 
@@ -11,8 +13,9 @@ use BenSampo\Enum\Enum;
  */
 final class ServiceStatus extends Enum
 {
-    const  Published = 'published';
-    const  Draft = 'draft';
+    const Published = 'published';
 
-    const  Archived = 'archived';
+    const Draft = 'draft';
+
+    const Archived = 'archived';
 }

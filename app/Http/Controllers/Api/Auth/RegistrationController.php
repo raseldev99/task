@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 class RegistrationController extends Controller
 {
     use ApiResponse;
+
     public AuthenticationService $authenticationService;
+
     public function __construct(AuthenticationService $authenticationService)
     {
         $this->authenticationService = $authenticationService;
@@ -20,12 +22,10 @@ class RegistrationController extends Controller
 
     /**
      *Handle register request
-     * @param RegistrationRequest $request
-     * @return JsonResponse
      */
     public function register(RegistrationRequest $request): JsonResponse
     {
-        //create user using validated data
+        // create user using validated data
         $user = $this->authenticationService->register($request->validated());
 
         return $this->ok('Register Successful');

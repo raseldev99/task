@@ -2,8 +2,8 @@
 
 namespace App\Traits;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +29,7 @@ trait ApiResponse
             $response['data'] = $data;
         }
 
-        if (!empty($meta)) {
+        if (! empty($meta)) {
             $response['meta'] = $meta;
         }
 
@@ -99,7 +99,7 @@ trait ApiResponse
             $response['errors'] = $errors;
         }
 
-        if (!empty($meta)) {
+        if (! empty($meta)) {
             $response['meta'] = $meta;
         }
 
@@ -163,19 +163,18 @@ trait ApiResponse
      * Return paginated response
      */
     public function paginated(
-        Paginator | LengthAwarePaginator | ResourceCollection $paginator,
+        Paginator|LengthAwarePaginator|ResourceCollection $paginator,
         string $message = 'Data retrieved successfully',
         array $meta = []
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $isResourceCollection = $paginator instanceof ResourceCollection;
         $underlyingPaginator = $isResourceCollection ? $paginator->resource : $paginator;
 
         // Validate that we have paginated data
-        if (!($underlyingPaginator instanceof Paginator)) {
+        if (! ($underlyingPaginator instanceof Paginator)) {
             if ($isResourceCollection) {
                 throw new \InvalidArgumentException(
-                    'ResourceCollection does not contain paginated data. Resource type: ' . get_class($paginator->resource)
+                    'ResourceCollection does not contain paginated data. Resource type: '.get_class($paginator->resource)
                 );
             }
             throw new \InvalidArgumentException('Invalid paginator type provided.');
@@ -200,10 +199,10 @@ trait ApiResponse
                 'last' => $paginator->url($paginator->lastPage()),
                 'prev' => $paginator->previousPageUrl(),
                 'next' => $paginator->nextPageUrl(),
-            ]
+            ],
         ];
 
-        if (!empty($meta)) {
+        if (! empty($meta)) {
             $response['meta'] = $meta;
         }
 
@@ -228,7 +227,7 @@ trait ApiResponse
             'count' => is_countable($data) ? count($data) : null,
         ];
 
-        if (!empty($meta)) {
+        if (! empty($meta)) {
             $response['meta'] = $meta;
         }
 

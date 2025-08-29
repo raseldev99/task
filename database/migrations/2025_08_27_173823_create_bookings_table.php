@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('service_id')->nullable()->constrained('services')->nullOnDelete();
             $table->date('booking_date');
-            $table->enum('status',BookingStatus::getValues())->default(BookingStatus::Pending());
+            $table->enum('status', BookingStatus::getValues())->default(BookingStatus::Pending());
             $table->timestamps();
         });
     }

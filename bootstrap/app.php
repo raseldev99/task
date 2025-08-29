@@ -21,10 +21,11 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (Throwable $e, Request $request) {
-            //handle api exception
+            // handle api exception
             if ($request->is('api/*')) {
                 return (new ApiExceptionHandler)->handle($e, $request);
             }
+
             return null;
         });
     })->create();

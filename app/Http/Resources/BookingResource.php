@@ -19,7 +19,7 @@ class BookingResource extends JsonResource
             'service' => new ServiceResource($this->whenLoaded('service')),
             'user' => new UserResource($this->whenLoaded('user')),
             'booking_date' => $this->booking_date,
-            'status' => $this->status
+            'status' => $this->status,
         ];
     }
 }
