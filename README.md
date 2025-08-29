@@ -27,6 +27,7 @@ It provides functionality for two types of users: **Customers** and **Admins**.
 1. Clone the repository:
    ```bash
    git clone https://github.com/raseldev99/task.git
+   
    cd task
 2. Install dependencies:
    ```bash
